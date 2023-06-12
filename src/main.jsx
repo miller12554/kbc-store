@@ -1,15 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
 import './index.css'
-import AuthProvider from './context/UserAuth1.jsx'
 import SiteRoot from './SiteLayout/SiteRoot'
+import { AuthContextProvider } from './context/AuthContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
+   
+   <AuthContextProvider>
   <SiteRoot />
-      </AuthProvider>
+    </AuthContextProvider>
+     
    
   </React.StrictMode>,
 )

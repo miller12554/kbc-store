@@ -66,9 +66,14 @@ const Navbar = () => {
 							Account
 						</NavLink>
 					</li>
-					<li className="my-auto">
-						<Dropdead />
+					<li className="p-4">
+						<NavLink className="text-green-500" to="/sign-in">
+							Account
+						</NavLink>
 					</li>
+					{/* <li className="my-auto">
+						<Dropdead />
+					</li> */}
 				</ul>
 			</div>
 			<div className="mr-8">
@@ -107,7 +112,7 @@ const Navbar = () => {
 					<NavLink to="/">Home</NavLink>
 				</li>
 				<li className="p-4">
-					<NavLink to="/account">Account</NavLink>
+					{/* <NavLink to="/account">Account</NavLink> */}
 				</li>
 			</ul>
 		</div>
