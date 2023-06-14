@@ -7,67 +7,49 @@ import Dropdead from "./Dropdead";
 import { UserAuth } from '../../context/AuthContext';
 // import { user } from '../../context/AuthContext';
 
-const logOutter = async () => {
-		await auth.signOut().then(console.log("signed out."));
-	};
 
 
 const Navbar = () => {
 	
-	
-	function onLogout() {
-    auth.signOut();
-    navigate("/sign-in");
-  }
-	
-	
-	
-
-	const logOut = async () => {
-		await auth.signOut().then(console.log("signed out."));
-	};
-
+  const navigate = useNavigate();
+  
+	 
 	const [nav, setNav] = useState(false);
 
 	const handleNav = () => {
 		setNav(!nav);
 	};
 	
-  const routeChange = () =>{ 
-    let path = `newPath`; 
-    navigate(logout);
-  }
+  
 
 	const [pageState, setPageState] = useState("");
-	const [pageState1, setPageState1] = useState(" ");
+	const [pageState11, setPageState11] = useState();
 	const location = useLocation();
-	const navigate = useNavigate();
 	const auth = getAuth();
 	const user  = getAuth()
 	useEffect(() => {
 		 
-    onAuthStateChanged(auth, (user) => {
+		onAuthStateChanged(auth, (user) => {
+		function onLogout() {
+    auth.signOut();
+    Navigate("/");
+  }
 		if (user === user) {
 			setPageState("Log Out")
-
+			
+			
 			if (!user) {
 				setPageState("sign in")
 			}
+				if (user === user) { setPageState11(<div>{user?.displayName}</div>)}
 
-	
-			
-			
-	  }
-    });
-  }, []);
-  function pathMatchRoute(route) {
-    if (route === location.pathname) {
-      return true;
-    }
-  }
+			}
 		
 
-
+	});
+		
+  }, [auth]);
+  
 	function pathMatchRoute(route) {
 		if (route === location.pathname) {
 			return true;
@@ -77,74 +59,47 @@ const Navbar = () => {
 	return (
 	
 		
-		<div className="flex justify-between items-center h-14 w-full mx-auto px-4 bg-black text-white">
-			<div className="">
-				<div className="w-full text-3xl font-bold text-green-500">
-					Wanted Today
+		<div className=" h-16 max-h-16     bg-black ">
+			
+			<div className="flex max-w-[95vw] mx-auto  ">
+				<div className="basis-3/12 ">
+					<p className="text-2xl pt-1 text-green-500 inline-flex ">
+					Wanted Today Store
+					</p>
+				
 				</div>
-			</div>
-			<div className="">
-				<ul className="hidden md:flex">
-					<li className="p-4">
-						<NavLink className="text-green-500" to="/">
-							Home
-						</NavLink>
-					</li>
-					<li className="p-4">
-						<NavLink className="text-green-500" to="/profile">
-							Profile
-						</NavLink>
-					</li>
-					<li className="p-4">
-						<NavLink className="text-green-500" to="/account">
-							Account
-						</NavLink>
-					</li>
-					<li className="p-4">
-						<NavLink className="text-green-500" to="/sign-in">
-							Account
-						</NavLink>
-					</li>
-					{/* <li className="my-auto">
-						<Dropdead />
-					</li> */}
-				</ul>
+				<div className="basis-4/12">
+					<ul className="flex text-white space-x-10  mt-8">
+					<li>Home</li>
+					<li>Register</li>
+					<li>LogOut</li>
+					<li>Account</li>
+					<li>Sign In</li>
+					</ul>
+				
+				</div>
+				<div className="basis-3/12 w-full bg-slate-950 flex flex-row-reverse max-h-8 mt-4 ">
+					<div className="grid grid-cols-2  space-x-7 ml-auto text-xs text-yellow-500   ">
+					<li className="m-auto">hello there</li> 
+					<li className="m-auto">hello there</li> 
+					<li className="m-auto">hello there</li> 
+					<li className="m-auto">hello there</li> 
+					</div>
+				</div>
+			
 			</div>
 
-	
-                            
-			<div className="mr-8">
-				 <ul className="flex space-x-10">
-            <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
-                pathMatchRoute("/") && "text-black border-b-red-500"
-              }`}
-              onClick={() => navigate("/")}
-            >
-              Home
-            </li>
-            <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
-                pathMatchRoute("/offers") && "text-black border-b-red-500"
-              }`}
-              onClick={() => navigate("/offers")}
-            >
-              Offers
-            </li>
-            <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
-                (pathMatchRoute("/sign-in") || pathMatchRoute("/account") || pathMatchRoute("/account")) 
-              
-              }`}
-						onClick={() => navigate("/sign-in")}
-			 			
-						
-            >
-             {pageState} 
-             {pageState1} 
-            </li>
-          </ul>
-			</div>
+
+
+
+
+
+
+
+
+
+
+				
 			<div onClick={handleNav} className="block md:hidden ">
 				{nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
 			</div>
@@ -166,4 +121,4 @@ const Navbar = () => {
 	);
 };
 
-export default (Navbar);
+export default Navbar;

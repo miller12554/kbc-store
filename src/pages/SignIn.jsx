@@ -18,6 +18,7 @@ const Signin = () => {
   useEffect(() => {
     if (user != null) {
       navigate('/account');
+      preventDefault();
     }
   }, [user]);
 

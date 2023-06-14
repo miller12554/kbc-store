@@ -30,9 +30,10 @@ export const AuthContextProvider = ({ children }) => {
     signInWithRedirect(auth, provider)
   };
 
-  const logOut = () => {
-      signOut(auth)
+const logOut = () => {
+  return signOut(auth);
   }
+   
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -45,7 +46,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{createUser,  signIn, googleSignIn, logOut, user }}>
+    <AuthContext.Provider value={{user, createUser,  signIn, googleSignIn, logOut,   }}>
       {children}
     </AuthContext.Provider>
   );
