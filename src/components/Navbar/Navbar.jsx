@@ -1,14 +1,24 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, Link,  } from "react-router-dom";
 import { auth } from "../../FirebaseConfig";
 import Dropdead from "./Dropdead";
+import { UserAuth } from '../../context/AuthContext';
+// import { user } from '../../context/AuthContext';
+
+const logOutter = async () => {
+		await auth.signOut().then(console.log("signed out."));
+	};
+
 
 const Navbar = () => {
 	
-	const [liked, setLiked] = useState(false);
-
+	
+	function onLogout() {
+    auth.signOut();
+    navigate("/sign-in");
+  }
 	
 	
 	
@@ -22,20 +32,42 @@ const Navbar = () => {
 	const handleNav = () => {
 		setNav(!nav);
 	};
+	
+  const routeChange = () =>{ 
+    let path = `newPath`; 
+    navigate(logout);
+  }
 
-	const [pageState, setPageState] = useState("Sign in");
+	const [pageState, setPageState] = useState("");
+	const [pageState1, setPageState1] = useState(" ");
 	const location = useLocation();
 	const navigate = useNavigate();
 	const auth = getAuth();
+	const user  = getAuth()
 	useEffect(() => {
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				setPageState("You are signed in");
-			} else {
-				setPageState("Sign in");
+		 
+    onAuthStateChanged(auth, (user) => {
+		if (user === user) {
+			setPageState("Log Out")
+
+			if (!user) {
+				setPageState("sign in")
 			}
-		});
-	}, [auth]);
+
+	
+			
+			
+	  }
+    });
+  }, []);
+  function pathMatchRoute(route) {
+    if (route === location.pathname) {
+      return true;
+    }
+  }
+		
+
+
 	function pathMatchRoute(route) {
 		if (route === location.pathname) {
 			return true;
@@ -43,6 +75,8 @@ const Navbar = () => {
 	}
 
 	return (
+	
+		
 		<div className="flex justify-between items-center h-14 w-full mx-auto px-4 bg-black text-white">
 			<div className="">
 				<div className="w-full text-3xl font-bold text-green-500">
@@ -76,27 +110,40 @@ const Navbar = () => {
 					</li> */}
 				</ul>
 			</div>
+
+	
+                            
 			<div className="mr-8">
-				<ul className="hidden md:flex space-x-5 text-yellow-500 text-xs">
-				
-						<li
-							className={`cursor-pointer  ${
-								(pathMatchRoute("/login") || pathMatchRoute("/account")) &&
-								"text-red-500 border-b-red-500"
-							}`}
-							onClick={() => navigate("/login")}
-							
-						>
-						{pageState}
+				 <ul className="flex space-x-10">
+            <li
+              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
+                pathMatchRoute("/") && "text-black border-b-red-500"
+              }`}
+              onClick={() => navigate("/")}
+            >
+              Home
+            </li>
+            <li
+              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
+                pathMatchRoute("/offers") && "text-black border-b-red-500"
+              }`}
+              onClick={() => navigate("/offers")}
+            >
+              Offers
+            </li>
+            <li
+              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
+                (pathMatchRoute("/sign-in") || pathMatchRoute("/account") || pathMatchRoute("/account")) 
+              
+              }`}
+						onClick={() => navigate("/sign-in")}
+			 			
 						
-						</li>
-					
-						
-					
-					<li>
-						<NavLink to="/register">Register</NavLink>
-					</li>
-				</ul>
+            >
+             {pageState} 
+             {pageState1} 
+            </li>
+          </ul>
 			</div>
 			<div onClick={handleNav} className="block md:hidden ">
 				{nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
@@ -119,4 +166,4 @@ const Navbar = () => {
 	);
 };
 
-export default Navbar;
+export default (Navbar);

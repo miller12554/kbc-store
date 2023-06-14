@@ -9,6 +9,8 @@ import Home from '../pages/Home'
 import Account from '../pages/Account'
 import Signin from '../pages/SignIn'
 import Profile from '../pages/Profile'
+import SignUp from '../pages/SignUp'
+import Logout from '../pages/Logout'
   
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,7 +19,8 @@ const router = createBrowserRouter(
     <Route path="/" element={<SiteLayout />} >
       <Route index element={<Home />} />
           <Route path="sign-in" element={<Signin />} />
-       
+          <Route path="sign-up" element={<SignUp />} />
+       <Route path="logout" element={<Logout />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/account" element={<Account />} />
         {/* <Route path="register" element={<Register />} /> */}

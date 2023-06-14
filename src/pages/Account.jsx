@@ -1,27 +1,24 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 
 const Account = () => {
-  const { user, logout } = UserAuth();
-  const navigate = useNavigate();
+  const { logOut, user } = UserAuth();
 
-  const handleLogout = async () => {
+  const handleSignOut = async () => {
     try {
-      await logout();
-      navigate('/');
-      console.log('You are logged out')
-    } catch (e) {
-      console.log(e.message);
+      await logOut();
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
-    <div className='max-w-[600px] mx-auto my-16 p-4'>
-      <h1 className='text-2xl font-bold py-4'>Account</h1>
-      <p>User Email: {user && user.email}</p>
-
-      <button onClick={handleLogout} className='border px-6 py-2 my-4'>
+    <div className='w-[300px] m-auto'>
+      <h1 className='text-center text-2xl font-bold pt-12'>Account</h1>
+      <div>
+        <p>Welcome, {user?.displayName}</p>
+      </div>
+      <button onClick={handleSignOut} className='border py-2 px-5 mt-10'>
         Logout
       </button>
     </div>
